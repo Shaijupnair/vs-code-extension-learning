@@ -1,0 +1,113 @@
+{
+  "name": "first-extension",
+  "displayName": "First Extension",
+  "description": "A basic Hello World extension",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "AI",
+    "Chat",
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "chatParticipants": [
+      {
+        "id": "legacy.apiHelper",
+        "name": "api-helper",
+        "description": "Finds reusable Java APIs in the legacy codebase.",
+        "isSticky": true,
+        "commands": [
+          {
+            "name": "search",
+            "description": "Find APIs for a specific task"
+          }
+        ]
+      }
+    ],
+    "commands": [
+      {
+        "command": "agent.askOpenAI",
+        "title": "Agent: Ask (OpenAI)"
+      },
+      {
+        "command": "first-extension.helloWorld",
+        "title": "DevDash: Hello World"
+      },
+      {
+        "command": "first-extension.timeGreeting",
+        "title": "DevDash: Time Greeting"
+      },
+      {
+        "command": "first-extension.addTask",
+        "title": "DevDash: Add Task"
+      },
+      {
+        "command": "first-extension.showRandomTask",
+        "title": "DevDash: Show Random Task"
+      },
+      {
+        "command": "first-extension.showHighPriority",
+        "title": "DevDash: Show High Priority Tasks"
+      },
+      {
+        "command": "first-extension.selectFolder",
+        "title": "DevDash:Select Folder"
+      },
+      {
+        "command": "first-extension.indexSource",
+        "title": "DevDash: Index Source Folder"
+      },
+      {
+        "command": "first-extension.searchFile",
+        "title": "DevDash: Search File"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "first-extension.addTask",
+        "key": "ctrl+shift+b",
+        "mac": "cmd+shift+b"
+      },
+      {
+        "command": "first-extension.showRandomTask",
+        "key": "ctrl+shift+c",
+        "mac": "cmd+shift+c"
+      }
+    ],
+    "configuration": {
+      "title": "Legacy Agent",
+      "properties": {
+        "legacyAgent.openaiApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Your OpenAI API Key"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "20.x",
+    "@types/vscode": "^1.80.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@orama/orama": "^3.1.18",
+    "@orama/plugin-data-persistence": "^3.1.18",
+    "@orama/plugin-embeddings": "^3.1.18",
+    "@tensorflow/tfjs-backend-cpu": "^3.21.0",
+    "@tensorflow/tfjs-core": "^3.21.0",
+    "@xenova/transformers": "^2.17.2",
+    "openai": "^6.15.0",
+    "tree-sitter-java": "^0.23.5",
+    "web-tree-sitter": "^0.26.3"
+  }
+}
