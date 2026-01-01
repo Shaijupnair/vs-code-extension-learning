@@ -1,0 +1,62 @@
+{
+  "dog_methods": [
+    {
+      "method_name": "bark",
+      "method_signature": "public void bark()",
+      "method_body": "{\n        System.out.println(getName() + \" barks: Woof!\");\n    }",
+      "class_context": "Package: com.example.animals, Class: Dog, Fields: private String breed;, Extends: Animal, Inherited Methods: [eat, sleep, getName, makeSound]",
+      "id": "6b9ef34c9fddc32fa797ca9fc3586112429084afbc4f398ae93e6f486532a359"
+    },
+    {
+      "method_name": "wagTail",
+      "method_signature": "public void wagTail()",
+      "method_body": "{\n        System.out.println(getName() + \" is wagging tail\");\n    }",
+      "class_context": "Package: com.example.animals, Class: Dog, Fields: private String breed;, Extends: Animal, Inherited Methods: [eat, sleep, getName, makeSound]",
+      "id": "e406c9d9ce908253fbe2ebb6b96e4530a8d296304bda1f09a2efaa31a9232522"
+    },
+    {
+      "method_name": "makeSound",
+      "method_signature": "@Override public void makeSound()",
+      "method_body": "{\n        bark();\n    }",
+      "class_context": "Package: com.example.animals, Class: Dog, Fields: private String breed;, Extends: Animal, Inherited Methods: [eat, sleep, getName, makeSound]",
+      "id": "067b2607b32b2755dc8480578cc9a5973b5fa94031fad7ae85aec918a4b65cfb"
+    },
+    {
+      "method_name": "getBreed",
+      "method_signature": "public String getBreed()",
+      "method_body": "{\n        return breed;\n    }",
+      "class_context": "Package: com.example.animals, Class: Dog, Fields: private String breed;, Extends: Animal, Inherited Methods: [eat, sleep, getName, makeSound]",
+      "id": "f97e0b40f338dc4afe6fc5d6d833974f4cf257e4a0e42f101bcab99d6a1cf98d"
+    }
+  ],
+  "cat_methods": [
+    {
+      "method_name": "meow",
+      "method_signature": "public void meow()",
+      "method_body": "{\n        System.out.println(getName() + \" meows: Meow!\");\n    }",
+      "class_context": "Package: com.example.animals, Class: Cat, Fields: private boolean indoor;, Extends: Animal, Inherited Methods: [eat, sleep, getName, makeSound]",
+      "id": "60e1c3788ddc1d4e375cea06a648afec7c65f9f7d901e33b035066b3415207a4"
+    },
+    {
+      "method_name": "purr",
+      "method_signature": "public void purr()",
+      "method_body": "{\n        System.out.println(getName() + \" purrs\");\n    }",
+      "class_context": "Package: com.example.animals, Class: Cat, Fields: private boolean indoor;, Extends: Animal, Inherited Methods: [eat, sleep, getName, makeSound]",
+      "id": "41448656df3902a22cadd74ff730e8f08e62d46727b71c2bb0fd86f6516fb82b"
+    },
+    {
+      "method_name": "makeSound",
+      "method_signature": "@Override public void makeSound()",
+      "method_body": "{\n        meow();\n    }",
+      "class_context": "Package: com.example.animals, Class: Cat, Fields: private boolean indoor;, Extends: Animal, Inherited Methods: [eat, sleep, getName, makeSound]",
+      "id": "a69e86121b6b8b6a7382356bba396bfceffd87fa99092f62e2ab533628efdad8"
+    },
+    {
+      "method_name": "isIndoor",
+      "method_signature": "public boolean isIndoor()",
+      "method_body": "{\n        return indoor;\n    }",
+      "class_context": "Package: com.example.animals, Class: Cat, Fields: private boolean indoor;, Extends: Animal, Inherited Methods: [eat, sleep, getName, makeSound]",
+      "id": "cf3f673bc5ddc4d0927ea30d428aec9a8c4516216b1c9ea1c468b6211ffdc518"
+    }
+  ]
+}

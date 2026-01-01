@@ -1,0 +1,72 @@
+[
+  {
+    "method_name": "test",
+    "method_signature": "public void test()",
+    "method_body": "{\n        System.out.println(\"Test with no parameters\");\n        counter++;\n    }",
+    "class_context": "Package: com.example.test, Class: OverloadTest, Fields: private int counter;; private String name;",
+    "id": "6d1975db55fef2931b4627d93489c2228dcbf7c19ebf798a24c32345c6619838"
+  },
+  {
+    "method_name": "test",
+    "method_signature": "public void test(int value)",
+    "method_body": "{\n        System.out.println(\"Test with int: \" + value);\n        counter = value;\n    }",
+    "class_context": "Package: com.example.test, Class: OverloadTest, Fields: private int counter;; private String name;",
+    "id": "07064a588e174629da681557240805a079f5ff48ba717e79a1b0a57f9f3f6da9"
+  },
+  {
+    "method_name": "test",
+    "method_signature": "public void test(String message)",
+    "method_body": "{\n        System.out.println(\"Test with String: \" + message);\n        name = message;\n    }",
+    "class_context": "Package: com.example.test, Class: OverloadTest, Fields: private int counter;; private String name;",
+    "id": "c7000776a70ea2b258dff1fde44053629eb5bd947d2ebca54b06dc29ff7e93c5"
+  },
+  {
+    "method_name": "test",
+    "method_signature": "public void test(int value, String message)",
+    "method_body": "{\n        System.out.println(\"Test with int and String: \" + value + \", \" + message);\n        counter = value;\n        name = message;\n    }",
+    "class_context": "Package: com.example.test, Class: OverloadTest, Fields: private int counter;; private String name;",
+    "id": "6115b33dd5eb43793c9bde3e9e6192aca4d25dcc8dc2c1603daf0a3bcc3beb9f"
+  },
+  {
+    "method_name": "calculate",
+    "method_signature": "public int calculate(int x)",
+    "method_body": "{\n        return x * 2;\n    }",
+    "class_context": "Package: com.example.test, Class: OverloadTest, Fields: private int counter;; private String name;",
+    "id": "0843da3d8400778876cc439db0f67e8dfa5468eec587fa5633f1a6430f34db94"
+  },
+  {
+    "method_name": "calculate",
+    "method_signature": "public int calculate(String x)",
+    "method_body": "{\n        return x.length();\n    }",
+    "class_context": "Package: com.example.test, Class: OverloadTest, Fields: private int counter;; private String name;",
+    "id": "601797b55d7abc5949e44f46b9f560c27f33a28eb2fae6fe2ca3f576d33edaef"
+  },
+  {
+    "method_name": "calculate",
+    "method_signature": "public int calculate(int base, int index)",
+    "method_body": "{\n        return base + index;\n    }",
+    "class_context": "Package: com.example.test, Class: OverloadTest, Fields: private int counter;; private String name;",
+    "id": "f6477d089d8d97a279b57a365d670fefb2fe0ae3863e7084ba0c34ef8f376dbd"
+  },
+  {
+    "method_name": "calculate",
+    "method_signature": "public double calculate(int base, double multiplier)",
+    "method_body": "{\n        return base * multiplier;\n    }",
+    "class_context": "Package: com.example.test, Class: OverloadTest, Fields: private int counter;; private String name;",
+    "id": "43127d350eeb96a6cad2743f393af8072bb5b62bb7caab9cffd68da44ae1f3df"
+  },
+  {
+    "method_name": "process",
+    "method_signature": "public String process(int value)",
+    "method_body": "{\n        return \"Processed: \" + value;\n    }",
+    "class_context": "Package: com.example.test, Class: OverloadTest, Fields: private int counter;; private String name;",
+    "id": "ad2e8d8cb5aee799e122d3eefdf3e16b7a9bd51e8170179188527a01b002089c"
+  },
+  {
+    "method_name": "process",
+    "method_signature": "public boolean process(String input, boolean validate)",
+    "method_body": "{\n        return validate && input != null && !input.isEmpty();\n    }",
+    "class_context": "Package: com.example.test, Class: OverloadTest, Fields: private int counter;; private String name;",
+    "id": "935b429901079d57e96f3c570c61d9e566376c6e698eccdd6f91e1078d47dc33"
+  }
+]

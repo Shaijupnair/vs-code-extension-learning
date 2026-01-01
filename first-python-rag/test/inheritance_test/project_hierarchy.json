@@ -1,0 +1,32 @@
+{
+  "com.example.animals.Animal": {
+    "parent": null,
+    "methods": [
+      "eat",
+      "sleep",
+      "getName",
+      "makeSound"
+    ],
+    "simple_name": "Animal"
+  },
+  "com.example.animals.Cat": {
+    "parent": "Animal",
+    "methods": [
+      "meow",
+      "purr",
+      "makeSound",
+      "isIndoor"
+    ],
+    "simple_name": "Cat"
+  },
+  "com.example.animals.Dog": {
+    "parent": "Animal",
+    "methods": [
+      "bark",
+      "wagTail",
+      "makeSound",
+      "getBreed"
+    ],
+    "simple_name": "Dog"
+  }
+}

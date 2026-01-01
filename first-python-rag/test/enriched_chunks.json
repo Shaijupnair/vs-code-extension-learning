@@ -1,0 +1,115 @@
+[
+  {
+    "method_name": "processTransaction",
+    "method_signature": "public void processTransaction(Transaction t)",
+    "method_body": "{\n        if (t.validate()) {\n            System.out.println(\"Processing transaction: \" + t.getId());\n        }\n    }",
+    "class_context": "Package: com.example.transactions, Class: TransactionProcessor, Fields: private Widget widget;; private List<Transaction> transactions;",
+    "dependency_types": [
+      "Transaction"
+    ],
+    "id": "93cb5946612a0668b37b29b18f58b54bd27084e2c4a61c484887c1baf625666b",
+    "summary": "Method processTransaction performs business logic operations",
+    "keywords": [
+      "processtransaction",
+      "java",
+      "method",
+      "transaction"
+    ]
+  },
+  {
+    "method_name": "processBatch",
+    "method_signature": "public int processBatch(List<Transaction> transactions)",
+    "method_body": "{\n        int count = 0;\n        for (Transaction t : transactions) {\n            processTransaction(t);\n            count++;\n        }\n        return count;\n    }",
+    "class_context": "Package: com.example.transactions, Class: TransactionProcessor, Fields: private Widget widget;; private List<Transaction> transactions;",
+    "dependency_types": [],
+    "id": "e1522c5e25d315a013a325c365e2aed7607460e2f74797cf6f2e85ddfe1db1f4",
+    "summary": "Method processBatch performs business logic operations",
+    "keywords": [
+      "processbatch",
+      "java",
+      "method"
+    ]
+  },
+  {
+    "method_name": "createTransaction",
+    "method_signature": "public Transaction createTransaction(String id, Widget w)",
+    "method_body": "{\n        Transaction t = new Transaction(id, 100.0, \"PURCHASE\");\n        System.out.println(\"Created by widget: \" + w.getName());\n        return t;\n    }",
+    "class_context": "Package: com.example.transactions, Class: TransactionProcessor, Fields: private Widget widget;; private List<Transaction> transactions;",
+    "dependency_types": [
+      "Widget"
+    ],
+    "id": "14d79b045fa155832e77ccdb1b67cde1cc6b9fe18ba59cfd05e84570c162877b",
+    "summary": "Method createTransaction performs business logic operations",
+    "keywords": [
+      "createtransaction",
+      "java",
+      "method",
+      "widget"
+    ]
+  },
+  {
+    "method_name": "mergeTransactions",
+    "method_signature": "public Transaction mergeTransactions(Transaction t1, Transaction t2)",
+    "method_body": "{\n        double totalAmount = t1.getAmount() + t2.getAmount();\n        return new Transaction(\"MERGED\", totalAmount, \"MERGED\");\n    }",
+    "class_context": "Package: com.example.transactions, Class: TransactionProcessor, Fields: private Widget widget;; private List<Transaction> transactions;",
+    "dependency_types": [
+      "Transaction"
+    ],
+    "id": "77bd5cd0aec4cb5426f7a5c8df2c5ece6618123b13796c0bed3f5cab58655a0d",
+    "summary": "Method mergeTransactions performs business logic operations",
+    "keywords": [
+      "mergetransactions",
+      "java",
+      "method",
+      "transaction"
+    ]
+  },
+  {
+    "method_name": "validateAmount",
+    "method_signature": "public boolean validateAmount(double amount, int precision)",
+    "method_body": "{\n        return amount > 0 && precision >= 0;\n    }",
+    "class_context": "Package: com.example.transactions, Class: TransactionProcessor, Fields: private Widget widget;; private List<Transaction> transactions;",
+    "dependency_types": [],
+    "id": "3c3c0fb1036ac68b74eb4dc6fefadf5a8f7cacbeec81a9b3e981bd411d372691",
+    "summary": "Method validateAmount performs business logic operations",
+    "keywords": [
+      "validateamount",
+      "java",
+      "method"
+    ]
+  },
+  {
+    "method_name": "findWidget",
+    "method_signature": "public Widget findWidget(String name, Widget defaultWidget)",
+    "method_body": "{\n        if (name != null && !name.isEmpty()) {\n            return new Widget(1, name);\n        }\n        return defaultWidget;\n    }",
+    "class_context": "Package: com.example.transactions, Class: TransactionProcessor, Fields: private Widget widget;; private List<Transaction> transactions;",
+    "dependency_types": [
+      "Widget"
+    ],
+    "id": "c9edeeed703141c2ecdcd2b3c56218f7c784e886220dd6c810fe6af90751dffc",
+    "summary": "Method findWidget performs business logic operations",
+    "keywords": [
+      "findwidget",
+      "java",
+      "method",
+      "widget"
+    ]
+  },
+  {
+    "method_name": "<Constructor>",
+    "method_signature": "public <Constructor> TransactionProcessor(Widget widget)",
+    "method_body": "{\n        this.widget = widget;\n    }",
+    "class_context": "Package: com.example.transactions, Class: TransactionProcessor, Fields: private Widget widget;; private List<Transaction> transactions;",
+    "dependency_types": [
+      "Widget"
+    ],
+    "id": "42936d706ab3fcb6e643e207c9da4557008f5ee0516ed5db79cf8a91c18c2b98",
+    "summary": "Constructor that initializes a new instance with provided parameters",
+    "keywords": [
+      "constructor",
+      "java",
+      "method",
+      "widget"
+    ]
+  }
+]

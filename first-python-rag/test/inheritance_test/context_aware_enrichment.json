@@ -1,0 +1,72 @@
+[
+  {
+    "method_name": "bark",
+    "method_signature": "public void bark()",
+    "method_body": "{\n        System.out.println(getName() + \" barks: Woof!\");\n    }",
+    "class_context": "Package: com.example.animals, Class: Dog, Fields: private String breed;, Extends: Animal, Inherited Methods: [eat, sleep, getName, makeSound]",
+    "dependency_types": [],
+    "id": "6b9ef34c9fddc32fa797ca9fc3586112429084afbc4f398ae93e6f486532a359",
+    "summary": "Method bark performs business logic operations",
+    "keywords": [
+      "bark",
+      "java",
+      "method"
+    ]
+  },
+  {
+    "method_name": "wagTail",
+    "method_signature": "public void wagTail()",
+    "method_body": "{\n        System.out.println(getName() + \" is wagging tail\");\n    }",
+    "class_context": "Package: com.example.animals, Class: Dog, Fields: private String breed;, Extends: Animal, Inherited Methods: [eat, sleep, getName, makeSound]",
+    "dependency_types": [],
+    "id": "e406c9d9ce908253fbe2ebb6b96e4530a8d296304bda1f09a2efaa31a9232522",
+    "summary": "Method wagTail performs business logic operations",
+    "keywords": [
+      "wagtail",
+      "java",
+      "method"
+    ]
+  },
+  {
+    "method_name": "makeSound",
+    "method_signature": "@Override public void makeSound()",
+    "method_body": "{\n        bark();\n    }",
+    "class_context": "Package: com.example.animals, Class: Dog, Fields: private String breed;, Extends: Animal, Inherited Methods: [eat, sleep, getName, makeSound]",
+    "dependency_types": [],
+    "id": "067b2607b32b2755dc8480578cc9a5973b5fa94031fad7ae85aec918a4b65cfb",
+    "summary": "Method makeSound performs business logic operations",
+    "keywords": [
+      "makesound",
+      "java",
+      "method"
+    ]
+  },
+  {
+    "method_name": "getBreed",
+    "method_signature": "public String getBreed()",
+    "method_body": "{\n        return breed;\n    }",
+    "class_context": "Package: com.example.animals, Class: Dog, Fields: private String breed;, Extends: Animal, Inherited Methods: [eat, sleep, getName, makeSound]",
+    "dependency_types": [],
+    "id": "f97e0b40f338dc4afe6fc5d6d833974f4cf257e4a0e42f101bcab99d6a1cf98d",
+    "summary": "Method getBreed performs business logic operations",
+    "keywords": [
+      "getbreed",
+      "java",
+      "method"
+    ]
+  },
+  {
+    "method_name": "<Constructor>",
+    "method_signature": "public <Constructor> Dog(String name, String breed)",
+    "method_body": "{\n        super(name);\n        this.breed = breed;\n    }",
+    "class_context": "Package: com.example.animals, Class: Dog, Fields: private String breed;, Extends: Animal, Inherited Methods: [eat, sleep, getName, makeSound]",
+    "dependency_types": [],
+    "id": "e08d33cadc20d326c972d33415fa2bc823802b22244cd510094763a45faf1741",
+    "summary": "Constructor that initializes a new instance with provided parameters",
+    "keywords": [
+      "constructor",
+      "java",
+      "method"
+    ]
+  }
+]

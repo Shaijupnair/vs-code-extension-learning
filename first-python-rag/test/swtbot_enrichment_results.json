@@ -1,0 +1,84 @@
+[
+  {
+    "method_name": "shell",
+    "method_signature": "public SWTBotShell shell()",
+    "method_body": "{\n\t\tShell shell = UIThreadRunnable.syncExec(new Result<Shell>() {\n\t\t\t@Override\n\t\t\tpublic Shell run() {\n\t\t\t\tIWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();\n\t\t\t\treturn (window == null) ? null : window.getShell();\n\t\t\t}\n\t\t});\n\t\treturn new SWTBotShell(shell);\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;, Extends: SWTBot",
+    "dependency_types": [],
+    "id": "a47d6df9d3d8de0a57c3b7e3f0165a91f93229a384aab986870901efa6b9a2bc",
+    "summary": "Retrieves the active shell of the current workbench window in the Eclipse UI environment.",
+    "keywords": [
+      "retrieve",
+      "active shell",
+      "Eclipse UI",
+      "SWTWorkbenchBot",
+      "SWTBotShell"
+    ]
+  },
+  {
+    "method_name": "run",
+    "method_signature": "@Override public Shell run()",
+    "method_body": "{\n\t\t\t\tIWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();\n\t\t\t\treturn (window == null) ? null : window.getShell();\n\t\t\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;, Extends: SWTBot",
+    "dependency_types": [],
+    "id": "b9b5b47eaad9b44a190b6a56fb25726f7b8789cb80501ad19b23196d0862ece4",
+    "summary": "Retrieves the shell of the currently active workbench window in the Eclipse environment.",
+    "keywords": [
+      "retrieve",
+      "active workbench window",
+      "Eclipse shell",
+      "SWTWorkbenchBot",
+      "PlatformUI"
+    ]
+  },
+  {
+    "method_name": "perspective",
+    "method_signature": "public SWTBotPerspective perspective(Matcher<?> matcher)",
+    "method_body": "{\n\t\tList<IPerspectiveDescriptor> perspectives = workbenchContentsFinder.findPerspectives(matcher);\n\t\treturn new SWTBotPerspective(perspectives.get(0), this);\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;, Extends: SWTBot",
+    "dependency_types": [
+      "Matcher"
+    ],
+    "id": "fce78c279da614725800dabdc9f18362958bdea085229aa8cc59f9ffa45b256b",
+    "summary": "Retrieves the first perspective matching the provided criteria from the workbench and returns it as an SWTBotPerspective object.",
+    "keywords": [
+      "perspective",
+      "SWTBotPerspective",
+      "Matcher",
+      "WorkbenchContentsFinder",
+      "findPerspectives"
+    ]
+  },
+  {
+    "method_name": "perspectiveByLabel",
+    "method_signature": "public SWTBotPerspective perspectiveByLabel(String label)",
+    "method_body": "{\n\t\treturn perspective(withPerspectiveLabel(label));\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;, Extends: SWTBot",
+    "dependency_types": [],
+    "id": "ce2a4e74b21ff4b54427252daf786ce696cc96e688c4720b0a9c894747cbdf99",
+    "summary": "Retrieves a perspective object based on a specified label from the workbench context.",
+    "keywords": [
+      "perspective",
+      "SWTWorkbenchBot",
+      "label",
+      "WorkbenchContentsFinder",
+      "retrieve"
+    ]
+  },
+  {
+    "method_name": "perspectiveById",
+    "method_signature": "public SWTBotPerspective perspectiveById(String id)",
+    "method_body": "{\n\t\treturn perspective(withPerspectiveId(id));\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;, Extends: SWTBot",
+    "dependency_types": [],
+    "id": "aa9580b4ecc83ea373bff948f55a2705568404f54fc0f3f67320dd7fb138b3d4",
+    "summary": "Retrieves the SWT perspective associated with the given perspective ID.",
+    "keywords": [
+      "SWTWorkbenchBot",
+      "perspective",
+      "perspectiveId",
+      "retrieve",
+      "SWT"
+    ]
+  }
+]

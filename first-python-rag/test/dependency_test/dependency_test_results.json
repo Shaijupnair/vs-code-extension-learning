@@ -1,0 +1,120 @@
+{
+  "transaction_class": [
+    {
+      "method_name": "getId",
+      "method_signature": "public String getId()",
+      "method_body": "{\n        return id;\n    }",
+      "class_context": "Package: com.example.transactions, Class: Transaction, Fields: private String id;; private double amount;; private String type;",
+      "dependency_types": [],
+      "id": "9ed0832b6696abb6cf609580462917ae70bf8efee29d5fed349a1fe45af91699"
+    },
+    {
+      "method_name": "getAmount",
+      "method_signature": "public double getAmount()",
+      "method_body": "{\n        return amount;\n    }",
+      "class_context": "Package: com.example.transactions, Class: Transaction, Fields: private String id;; private double amount;; private String type;",
+      "dependency_types": [],
+      "id": "445bf8dbc7330e221c73585003afa09062e8a9a8198a20ab3794bce23312c4dd"
+    },
+    {
+      "method_name": "validate",
+      "method_signature": "public boolean validate()",
+      "method_body": "{\n        return amount > 0 && id != null && !id.isEmpty();\n    }",
+      "class_context": "Package: com.example.transactions, Class: Transaction, Fields: private String id;; private double amount;; private String type;",
+      "dependency_types": [],
+      "id": "325d347d0085bc8fb7e7d633a61cb1adbc7f6734ce67cbf1f01f30be0526b056"
+    },
+    {
+      "method_name": "<Constructor>",
+      "method_signature": "public <Constructor> Transaction()",
+      "method_body": "{\n        this.id = \"\";\n        this.amount = 0.0;\n        this.type = \"UNKNOWN\";\n    }",
+      "class_context": "Package: com.example.transactions, Class: Transaction, Fields: private String id;; private double amount;; private String type;",
+      "dependency_types": [],
+      "id": "6af2c458c1f7e27caf46e9afa5b2629089e4a563ae7145294b0e811efdc66597"
+    },
+    {
+      "method_name": "<Constructor>",
+      "method_signature": "public <Constructor> Transaction(String id)",
+      "method_body": "{\n        this.id = id;\n        this.amount = 0.0;\n        this.type = \"UNKNOWN\";\n    }",
+      "class_context": "Package: com.example.transactions, Class: Transaction, Fields: private String id;; private double amount;; private String type;",
+      "dependency_types": [],
+      "id": "7ac78cf102a5b2a0be8ff8910ea825788006aa78f8de2ccdc904f5fda15a46af"
+    },
+    {
+      "method_name": "<Constructor>",
+      "method_signature": "public <Constructor> Transaction(String id, double amount, String type)",
+      "method_body": "{\n        this.id = id;\n        this.amount = amount;\n        this.type = type;\n    }",
+      "class_context": "Package: com.example.transactions, Class: Transaction, Fields: private String id;; private double amount;; private String type;",
+      "dependency_types": [],
+      "id": "11867a6c0fceac77d2ee2916c115416c0db09ec521e38ea2c95c33ae35c8dccf"
+    }
+  ],
+  "processor_class": [
+    {
+      "method_name": "processTransaction",
+      "method_signature": "public void processTransaction(Transaction t)",
+      "method_body": "{\n        if (t.validate()) {\n            System.out.println(\"Processing transaction: \" + t.getId());\n        }\n    }",
+      "class_context": "Package: com.example.transactions, Class: TransactionProcessor, Fields: private Widget widget;; private List<Transaction> transactions;",
+      "dependency_types": [
+        "Transaction"
+      ],
+      "id": "93cb5946612a0668b37b29b18f58b54bd27084e2c4a61c484887c1baf625666b"
+    },
+    {
+      "method_name": "processBatch",
+      "method_signature": "public int processBatch(List<Transaction> transactions)",
+      "method_body": "{\n        int count = 0;\n        for (Transaction t : transactions) {\n            processTransaction(t);\n            count++;\n        }\n        return count;\n    }",
+      "class_context": "Package: com.example.transactions, Class: TransactionProcessor, Fields: private Widget widget;; private List<Transaction> transactions;",
+      "dependency_types": [],
+      "id": "e1522c5e25d315a013a325c365e2aed7607460e2f74797cf6f2e85ddfe1db1f4"
+    },
+    {
+      "method_name": "createTransaction",
+      "method_signature": "public Transaction createTransaction(String id, Widget w)",
+      "method_body": "{\n        Transaction t = new Transaction(id, 100.0, \"PURCHASE\");\n        System.out.println(\"Created by widget: \" + w.getName());\n        return t;\n    }",
+      "class_context": "Package: com.example.transactions, Class: TransactionProcessor, Fields: private Widget widget;; private List<Transaction> transactions;",
+      "dependency_types": [
+        "Widget"
+      ],
+      "id": "14d79b045fa155832e77ccdb1b67cde1cc6b9fe18ba59cfd05e84570c162877b"
+    },
+    {
+      "method_name": "mergeTransactions",
+      "method_signature": "public Transaction mergeTransactions(Transaction t1, Transaction t2)",
+      "method_body": "{\n        double totalAmount = t1.getAmount() + t2.getAmount();\n        return new Transaction(\"MERGED\", totalAmount, \"MERGED\");\n    }",
+      "class_context": "Package: com.example.transactions, Class: TransactionProcessor, Fields: private Widget widget;; private List<Transaction> transactions;",
+      "dependency_types": [
+        "Transaction"
+      ],
+      "id": "77bd5cd0aec4cb5426f7a5c8df2c5ece6618123b13796c0bed3f5cab58655a0d"
+    },
+    {
+      "method_name": "validateAmount",
+      "method_signature": "public boolean validateAmount(double amount, int precision)",
+      "method_body": "{\n        return amount > 0 && precision >= 0;\n    }",
+      "class_context": "Package: com.example.transactions, Class: TransactionProcessor, Fields: private Widget widget;; private List<Transaction> transactions;",
+      "dependency_types": [],
+      "id": "3c3c0fb1036ac68b74eb4dc6fefadf5a8f7cacbeec81a9b3e981bd411d372691"
+    },
+    {
+      "method_name": "findWidget",
+      "method_signature": "public Widget findWidget(String name, Widget defaultWidget)",
+      "method_body": "{\n        if (name != null && !name.isEmpty()) {\n            return new Widget(1, name);\n        }\n        return defaultWidget;\n    }",
+      "class_context": "Package: com.example.transactions, Class: TransactionProcessor, Fields: private Widget widget;; private List<Transaction> transactions;",
+      "dependency_types": [
+        "Widget"
+      ],
+      "id": "c9edeeed703141c2ecdcd2b3c56218f7c784e886220dd6c810fe6af90751dffc"
+    },
+    {
+      "method_name": "<Constructor>",
+      "method_signature": "public <Constructor> TransactionProcessor(Widget widget)",
+      "method_body": "{\n        this.widget = widget;\n    }",
+      "class_context": "Package: com.example.transactions, Class: TransactionProcessor, Fields: private Widget widget;; private List<Transaction> transactions;",
+      "dependency_types": [
+        "Widget"
+      ],
+      "id": "42936d706ab3fcb6e643e207c9da4557008f5ee0516ed5db79cf8a91c18c2b98"
+    }
+  ]
+}

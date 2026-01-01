@@ -1,0 +1,240 @@
+[
+  {
+    "method_name": "shell",
+    "method_signature": "public SWTBotShell shell()",
+    "method_body": "{\n\t\tShell shell = UIThreadRunnable.syncExec(new Result<Shell>() {\n\t\t\t@Override\n\t\t\tpublic Shell run() {\n\t\t\t\tIWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();\n\t\t\t\treturn (window == null) ? null : window.getShell();\n\t\t\t}\n\t\t});\n\t\treturn new SWTBotShell(shell);\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "f8f47218544e35d552d0689c65c10431c0389a27dc352f40dbdf9a1f173b56d9"
+  },
+  {
+    "method_name": "run",
+    "method_signature": "@Override public Shell run()",
+    "method_body": "{\n\t\t\t\tIWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();\n\t\t\t\treturn (window == null) ? null : window.getShell();\n\t\t\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "531cdbb7a6074d322486a6624c2c5a0475674c2018c5e42881ed08c299cafc56"
+  },
+  {
+    "method_name": "perspective",
+    "method_signature": "public SWTBotPerspective perspective(Matcher<?> matcher)",
+    "method_body": "{\n\t\tList<IPerspectiveDescriptor> perspectives = workbenchContentsFinder.findPerspectives(matcher);\n\t\treturn new SWTBotPerspective(perspectives.get(0), this);\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "01de39d4db157bc6e3aa983e03c54094ba9f280366d9fda57e29d8fb9d273361"
+  },
+  {
+    "method_name": "perspectiveByLabel",
+    "method_signature": "public SWTBotPerspective perspectiveByLabel(String label)",
+    "method_body": "{\n\t\treturn perspective(withPerspectiveLabel(label));\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "c9c315acf8bb681d1f7759e2e439cf76ce1ff1745f8b9006bd3d0731bff8284f"
+  },
+  {
+    "method_name": "perspectiveById",
+    "method_signature": "public SWTBotPerspective perspectiveById(String id)",
+    "method_body": "{\n\t\treturn perspective(withPerspectiveId(id));\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "bd7db2b57b7000b0ddfc2e6a85c3ea1d407cf9faac4366fc2ef8cdf53ac2e9e9"
+  },
+  {
+    "method_name": "perspectives",
+    "method_signature": "public List<SWTBotPerspective> perspectives(Matcher<?> matcher)",
+    "method_body": "{\n\t\tList<IPerspectiveDescriptor> perspectives = workbenchContentsFinder.findPerspectives(matcher);\n\n\t\tList<SWTBotPerspective> perspectiveBots = new ArrayList<SWTBotPerspective>();\n\t\tfor (IPerspectiveDescriptor perspectiveDescriptor : perspectives)\n\t\t\tperspectiveBots.add(new SWTBotPerspective(perspectiveDescriptor, this));\n\n\t\treturn perspectiveBots;\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "056b34d295a0821cd263ac8c68851295a5895b47cb7402a749d4658ae9f548cc"
+  },
+  {
+    "method_name": "perspectives",
+    "method_signature": "public List<SWTBotPerspective> perspectives()",
+    "method_body": "{\n\t\treturn perspectives(Matchers.anything());\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "38b3ef23b0208e8ff4050f836fc822ebeee0c7eb949d7dc782ee4719beed9b11"
+  },
+  {
+    "method_name": "activePart",
+    "method_signature": "public SWTBotWorkbenchPart<?> activePart()",
+    "method_body": "{\n\t\tIWorkbenchPartReference part = workbenchContentsFinder.findActivePart();\n\t\tif (part instanceof IViewReference) {\n\t\t\treturn new SWTBotView((IViewReference) part, this);\n\t\t} else if (part instanceof IEditorReference) {\n\t\t\treturn new SWTBotEditor((IEditorReference) part, this);\n\t\t}\n\t\tthrow new WidgetNotFoundException(\"There is no active part\"); //$NON-NLS-1$\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "aef021921143950d5c654342e8c0f8a3dee074da13106662b84f80ae246eecc7"
+  },
+  {
+    "method_name": "view",
+    "method_signature": "public SWTBotView view(Matcher<IViewReference> matcher)",
+    "method_body": "{\n\t\tWaitForView waitForView = waitForView(matcher);\n\t\twaitUntilWidgetAppears(waitForView);\n\t\treturn new SWTBotView(waitForView.get(0), this);\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "b88324d58d2d8ffc06f5d15d863fad7b4b3dabf9326cb43af33097a0cfcbbaf6"
+  },
+  {
+    "method_name": "viewByPartName",
+    "method_signature": "public SWTBotView viewByPartName(String partName)",
+    "method_body": "{\n\t\tMatcher<IViewReference> withPartName = withPartName(partName);\n\t\treturn view(withPartName);\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "c2ff9be17531bc684997e5fe71f8e6d3b370aaa26a3b141fded40608ec2f80c1"
+  },
+  {
+    "method_name": "viewByTitle",
+    "method_signature": "public SWTBotView viewByTitle(String title)",
+    "method_body": "{\n\t\tMatcher<IViewReference> withTitle = withTitle(title);\n\t\treturn view(withTitle);\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "494dcfdd957a25db0fb8d8b911438d1631ef8e449394658dda655a9930546ba0"
+  },
+  {
+    "method_name": "viewById",
+    "method_signature": "public SWTBotView viewById(String id)",
+    "method_body": "{\n\t\tMatcher<IViewReference> withPartId = withPartId(id);\n\t\treturn view(withPartId);\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "96962dc86950a95efdc3aae80661cc86db2595e2346a118fddc19e8fe86fbdb9"
+  },
+  {
+    "method_name": "views",
+    "method_signature": "public List<SWTBotView> views(Matcher<?> matcher)",
+    "method_body": "{\n\t\tList<IViewReference> views = workbenchContentsFinder.findViews(matcher);\n\n\t\tList<SWTBotView> viewBots = new ArrayList<SWTBotView>();\n\t\tfor (IViewReference viewReference : views)\n\t\t\tviewBots.add(new SWTBotView(viewReference, this));\n\t\treturn viewBots;\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "a85c08e91ed664f1dfb18ede324611961dedc8134e6a88d48c462bb402e8d9e7"
+  },
+  {
+    "method_name": "views",
+    "method_signature": "public List<SWTBotView> views()",
+    "method_body": "{\n\t\treturn views(Matchers.anything());\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "42353128f87e23865b4526b18e8fa476f635c40e07c4edd80a35a236d802d100"
+  },
+  {
+    "method_name": "activeView",
+    "method_signature": "public SWTBotView activeView()",
+    "method_body": "{\n\t\tIViewReference view = workbenchContentsFinder.findActiveView();\n\t\tif (view == null)\n\t\t\tthrow new WidgetNotFoundException(\"There is no active view\"); //$NON-NLS-1$\n\t\treturn new SWTBotView(view, this);\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "5b612c2ebd27550c630002df63216e7c045d30b41df79fdca2539121978054fa"
+  },
+  {
+    "method_name": "editor",
+    "method_signature": "public SWTBotEditor editor(Matcher<IEditorReference> matcher)",
+    "method_body": "{\n\t\tWaitForEditor waitForEditor = waitForEditor(matcher);\n\t\twaitUntilWidgetAppears(waitForEditor);\n\t\treturn new SWTBotEditor(waitForEditor.get(0), this);\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "d8c966258d0e17c76574a323f937cf2b2f6b335cbf596e0d170d9f1a2e312d3b"
+  },
+  {
+    "method_name": "editors",
+    "method_signature": "public List<SWTBotEditor> editors(Matcher<?> matcher)",
+    "method_body": "{\n\t\tList<IEditorReference> editors = workbenchContentsFinder.findEditors(matcher);\n\n\t\tList<SWTBotEditor> editorBots = new ArrayList<SWTBotEditor>();\n\t\tfor (IEditorReference editorReference : editors)\n\t\t\teditorBots.add(new SWTBotEditor(editorReference, this));\n\n\t\treturn editorBots;\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "d1600e358239a6fb1f0bffcef640fcf0b86b6b24d516710c35c9cc35b4376440"
+  },
+  {
+    "method_name": "editors",
+    "method_signature": "public List<? extends SWTBotEditor> editors()",
+    "method_body": "{\n\t\treturn editors(Matchers.anything());\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "014433f22d1b3ef1f5a5d62c43f3302d633f6dba968c74a1d40eeecfa55c5bb0"
+  },
+  {
+    "method_name": "editorByTitle",
+    "method_signature": "public SWTBotEditor editorByTitle(String fileName)",
+    "method_body": "{\n\t\tMatcher<IEditorReference> withPartName = withPartName(fileName);\n\t\treturn editor(withPartName);\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "7a0e2d915e139a37d34c631b5536c1227692d870bb17c1a1b75af24bb243b9c8"
+  },
+  {
+    "method_name": "editorById",
+    "method_signature": "public SWTBotEditor editorById(String id)",
+    "method_body": "{\n\t\tMatcher<IEditorReference> withPartId = withPartId(id);\n\t\treturn editor(withPartId);\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "db356998afc0824b4391c0780fece5c806c1110633644f10a247bc2a23b5f4c1"
+  },
+  {
+    "method_name": "activeEditor",
+    "method_signature": "public SWTBotEditor activeEditor()",
+    "method_body": "{\n\t\tIEditorReference editor = workbenchContentsFinder.findActiveEditor();\n\t\tif (editor == null)\n\t\t\tthrow new WidgetNotFoundException(\"There is no active editor\"); //$NON-NLS-1$\n\t\treturn new SWTBotEditor(editor, this);\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "cbc4d76cf535fde965e23a0f1bb95a9b33b1ad5cbd75a55a175d4c5d275b36f2"
+  },
+  {
+    "method_name": "multipageEditor",
+    "method_signature": "public SWTBotMultiPageEditor multipageEditor(Matcher<IEditorReference> matcher)",
+    "method_body": "{\n\t\tWaitForEditor waitForEditor = waitForEditor(matcher);\n\t\twaitUntilWidgetAppears(waitForEditor);\n\t\treturn new SWTBotMultiPageEditor(waitForEditor.get(0), this);\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "fcbfb526f5b64b47c7e60d929181cbe6e5a9bb91d58fa23081fe6fc7eb907fd3"
+  },
+  {
+    "method_name": "multipageEditors",
+    "method_signature": "public List<SWTBotMultiPageEditor> multipageEditors(Matcher<?> matcher)",
+    "method_body": "{\n\t\tList<IEditorReference> editors = workbenchContentsFinder.findEditors(matcher);\n\n\t\tList<SWTBotMultiPageEditor> editorBots = new ArrayList<SWTBotMultiPageEditor>();\n\t\tfor (IEditorReference editorReference : editors)\n\t\t\teditorBots.add(new SWTBotMultiPageEditor(editorReference, this));\n\n\t\treturn editorBots;\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "9bd491315082db1b9d3837a0c016be53b11b7b77b9c5d9bdef116f1f2a59284e"
+  },
+  {
+    "method_name": "multipageEditors",
+    "method_signature": "public List<? extends SWTBotMultiPageEditor> multipageEditors()",
+    "method_body": "{\n\t\treturn multipageEditors(Matchers.anything());\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "d12b07b7908255dc5d9a24db755e5f3ee17a67d2bc2c02f88093a298fe6e942d"
+  },
+  {
+    "method_name": "multipageEditorByTitle",
+    "method_signature": "public SWTBotMultiPageEditor multipageEditorByTitle(String fileName)",
+    "method_body": "{\n\t\tMatcher<IEditorReference> withPartName = withPartName(fileName);\n\t\treturn multipageEditor(withPartName);\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "b6f3d25b3c395525bc92f0c4286afaa49047fe54f1ea36204787d1e419a07bb6"
+  },
+  {
+    "method_name": "multipageEditorById",
+    "method_signature": "public SWTBotMultiPageEditor multipageEditorById(String id)",
+    "method_body": "{\n\t\tMatcher<IEditorReference> withPartId = withPartId(id);\n\t\treturn multipageEditor(withPartId);\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "e981f60d2d787b70d9b778a27fbcf9b5584c34134fe61d86c6c6d3d918b8d85d"
+  },
+  {
+    "method_name": "activePerspective",
+    "method_signature": "public SWTBotPerspective activePerspective()",
+    "method_body": "{\n\t\tIPerspectiveDescriptor perspective = workbenchContentsFinder.findActivePerspective();\n\t\tif (perspective == null)\n\t\t\tthrow new WidgetNotFoundException(\"There is no active perspective\"); //$NON-NLS-1$\n\t\treturn new SWTBotPerspective(perspective, this);\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "d9dbb5c30ead484f167ba6ad3592c0cc2df6d4d68f4bdfeeb5b200e9838ca104"
+  },
+  {
+    "method_name": "resetWorkbench",
+    "method_signature": "public void resetWorkbench()",
+    "method_body": "{\n\t\tcloseAllShells();\n\t\tsaveAllEditors();\n\t\tcloseAllEditors();\n\t\tresetActivePerspective();\n\n\t\tdefaultPerspective().activate();\n\t\tresetActivePerspective();\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "0a5c04db4ce1c50e7387a49bfe751f797aa1df86813d5a32d5407abfa2702a76"
+  },
+  {
+    "method_name": "defaultPerspective",
+    "method_signature": "public SWTBotPerspective defaultPerspective()",
+    "method_body": "{\n\t\treturn syncExec(new Result<SWTBotPerspective>() {\n\n\t\t\t@Override\n\t\t\tpublic SWTBotPerspective run() {\n\t\t\t\tIWorkbench workbench = PlatformUI.getWorkbench();\n\t\t\t\treturn perspectiveById(workbench.getPerspectiveRegistry().getDefaultPerspective());\n\t\t\t}\n\t\t});\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "761e0a0b3adfd6ae7365ea10040f7a3b207d434c6cea7cb0b96cf10434edb0dd"
+  },
+  {
+    "method_name": "run",
+    "method_signature": "@Override public SWTBotPerspective run()",
+    "method_body": "{\n\t\t\t\tIWorkbench workbench = PlatformUI.getWorkbench();\n\t\t\t\treturn perspectiveById(workbench.getPerspectiveRegistry().getDefaultPerspective());\n\t\t\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "29df3423b5dd646210ffdfb28191dd02b1e01d04b25d8c7c686d43d0fbe68f10"
+  },
+  {
+    "method_name": "closeAllEditors",
+    "method_signature": "public void closeAllEditors()",
+    "method_body": "{\n\t\tnew DefaultWorkbench(this).closeAllEditors();\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "55d4d03e8b91966b99d51fcb23b4d28b2fe7abc728956dcf9df1fd570417b1c4"
+  },
+  {
+    "method_name": "saveAllEditors",
+    "method_signature": "public void saveAllEditors()",
+    "method_body": "{\n\t\tnew DefaultWorkbench(this).saveAllEditors();\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "92418b7673fcd4fe73c0a49ffcea69eeb87c6022d42c0ed2676df21321f34eba"
+  },
+  {
+    "method_name": "resetActivePerspective",
+    "method_signature": "public SWTBotPerspective resetActivePerspective()",
+    "method_body": "{\n\t\tnew DefaultWorkbench(this).resetActivePerspective();\n\t\treturn activePerspective();\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "1567ce6739218c1b5c3eb37f31551e2c079b737be6bfddbc290204a6d19c274a"
+  },
+  {
+    "method_name": "closeAllShells",
+    "method_signature": "public void closeAllShells()",
+    "method_body": "{\n\t\tnew DefaultWorkbench(this).closeAllShells();\n\t}",
+    "class_context": "Package: org.eclipse.swtbot.eclipse.finder, Class: SWTWorkbenchBot, Fields: private final WorkbenchContentsFinder workbenchContentsFinder;",
+    "id": "52c2eca4f1c6b45a6bfa4c11227088332440d0ef8334a9b490776d3b67bf3189"
+  }
+]

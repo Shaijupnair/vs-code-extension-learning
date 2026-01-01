@@ -1,0 +1,31 @@
+{
+  "com.example.transactions.Transaction": {
+    "parent": null,
+    "methods": [
+      "getId",
+      "getAmount",
+      "validate"
+    ],
+    "simple_name": "Transaction"
+  },
+  "com.example.transactions.TransactionProcessor": {
+    "parent": null,
+    "methods": [
+      "processTransaction",
+      "processBatch",
+      "createTransaction",
+      "mergeTransactions",
+      "validateAmount",
+      "findWidget"
+    ],
+    "simple_name": "TransactionProcessor"
+  },
+  "com.example.transactions.Widget": {
+    "parent": null,
+    "methods": [
+      "getId",
+      "getName"
+    ],
+    "simple_name": "Widget"
+  }
+}

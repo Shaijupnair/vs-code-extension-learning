@@ -1,0 +1,50 @@
+[
+  {
+    "method_name": "getId",
+    "method_signature": "public int getId()",
+    "method_body": "{\n        return id;\n    }",
+    "class_context": "Package: com.example.transactions, Class: Widget, Fields: private int id;; private String name;",
+    "dependency_types": [],
+    "id": "15f258dfe25083710bf76bb74a0806236fdfab48cf6411cdbfc565d8930c4cb1",
+    "summary": "Retrieves the unique identifier of a Widget instance.",
+    "keywords": [
+      "Widget",
+      "getId",
+      "identifier",
+      "transactions",
+      "Java"
+    ]
+  },
+  {
+    "method_name": "getName",
+    "method_signature": "public String getName()",
+    "method_body": "{\n        return name;\n    }",
+    "class_context": "Package: com.example.transactions, Class: Widget, Fields: private int id;; private String name;",
+    "dependency_types": [],
+    "id": "68bd3a1a99fec3012d0f9df6e704ae71f3b56f2dc3ef40739cc14b23c4052ab1",
+    "summary": "Retrieves the name of the widget instance.",
+    "keywords": [
+      "widget",
+      "getName",
+      "retrieve",
+      "name",
+      "object property"
+    ]
+  },
+  {
+    "method_name": "<Constructor>",
+    "method_signature": "public <Constructor> Widget()",
+    "method_body": "{\n        this.id = 0;\n        this.name = \"Default\";\n    }",
+    "class_context": "Package: com.example.transactions, Class: Widget, Fields: private int id;; private String name;",
+    "dependency_types": [],
+    "id": "6fdd53c1d31b1dea6b330413ecff6e8d2e296da73018aa75e9acb408281f715a",
+    "summary": "Initializes a Widget object with default values for its id and name fields.",
+    "keywords": [
+      "Widget",
+      "default values",
+      "object initialization",
+      "constructor",
+      "transactions"
+    ]
+  }
+]
