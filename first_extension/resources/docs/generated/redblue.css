@@ -1,0 +1,17 @@
+
+/* @theme redblue */
+section {
+  padding-left: 3rem;
+  border-left: 12px solid #1f4ed8;
+}
+section::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  width:6px;
+  height:100%;
+  background:#d81f1f;
+}
+h1,h2,h3{color:#1f4ed8}
+strong{color:#d81f1f}

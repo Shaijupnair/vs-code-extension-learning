@@ -17,7 +17,8 @@ A production-ready **Retrieval-Augmented Generation (RAG)** system for Java code
 - ✅ Context-aware prompts
 - ✅ Business logic summaries
 - ✅ Semantic keywords
-- ✅ OpenAI integration
+- ✅ **Dual Provider:** OpenAI (cloud) or Ollama (local)
+- ✅ DeepSeek Coder support (free!)
 
 ### 3. **Vector Database**
 - ✅ LanceDB storage
@@ -53,11 +54,29 @@ python -m venv venv
 pip install -r requirements.txt
 ```
 
-### Configure API Key
+### Configure LLM Provider
+
+**Option 1: Use Ollama (Free, Local)**
+
+Edit `config.ini`:
+```ini
+[Ingestion]
+llm_provider = ollama
+enrichment_model = deepseek-coder
+```
+
+**Option 2: Use OpenAI (Paid, Cloud)**
 
 Create `.env` file:
 ```
 OPENAI_API_KEY=your-key-here
+```
+
+Edit `config.ini`:
+```ini
+[Ingestion]
+llm_provider = openai
+enrichment_model = gpt-4o-mini
 ```
 
 ### Index Your Codebase
@@ -145,6 +164,8 @@ first-python-rag/
 ## 📚 Documentation
 
 - **[docs/CONFIG_GUIDE.md](docs/CONFIG_GUIDE.md)** - Configuration settings
+- **[docs/OLLAMA_INTEGRATION.md](docs/OLLAMA_INTEGRATION.md)** - 🆕 Ollama setup (free LLM)
+- **[docs/API_REFERENCE.md](docs/API_REFERENCE.md)** - Complete API guide
 - **[docs/PARSER_SUMMARY.md](docs/PARSER_SUMMARY.md)** - Parser features
 - **[docs/PARSER_DEPENDENCY_UPGRADE.md](docs/PARSER_DEPENDENCY_UPGRADE.md)** - Dependency tracking
 - **[docs/PARSER_INHERITANCE_UPGRADE.md](docs/PARSER_INHERITANCE_UPGRADE.md)** - Inheritance support

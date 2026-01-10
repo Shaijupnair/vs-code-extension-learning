@@ -123,9 +123,19 @@ class IngestionPipeline:
         self.parser = JavaCodeParser(hierarchy_map_path=str(hierarchy_file))
         logger.info("✓ Parser initialized with hierarchy map")
         
-        # Initialize enricher
-        self.enricher = CodeEnricher(mock_mode=self.mock_enrichment)
-        logger.info(f"✓ Enricher initialized (mock_mode={self.mock_enrichment})")
+        # Get enricher configuration from config
+        provider = config.get('Ingestion', 'llm_provider', fallback='openai')
+        ollama_url = config.get('Ingestion', 'ollama_base_url', fallback='http://localhost:11434')
+        model = config.get('Ingestion', 'enrichment_model', fallback='gpt-4o-mini')
+        
+        # Initialize enricher with provider
+        self.enricher = CodeEnricher(
+            mock_mode=self.mock_enrichment,
+            provider=provider,
+            model=model,
+            ollama_base_url=ollama_url
+        )
+        logger.info(f"✓ Enricher initialized (provider={provider}, model={model}, mock_mode={self.mock_enrichment})")
         
         # Initialize vector store
         self.vector_store = VectorStore(db_path=self.db_path)

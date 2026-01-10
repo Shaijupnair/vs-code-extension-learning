@@ -1,5 +1,15 @@
 ---
 marp: true
+theme: default
+paginate: true
+---
+
+# Git & GitHub Mastery
+### The Architect’s Guide
+
+---
+---
+marp: true
 ---
 
 Here is the complete, A-Z Master Documentation. This document strictly follows your `git_hub_learning.md` curriculum, integrates every detail from your `deep_dive` files, and applies the detailed explanatory style you requested.
@@ -298,7 +308,7 @@ Moving code from your file editor to the server is not a single step like "Save.
 * `git add <filename>`: Stages a specific file.
 * `git add .`: Stages **all** changed files in the current directory and subdirectories.
 * `git add -p`: **Interactive Mode**. Git asks you "Yes/No" for every single chunk of code changed. (Best for precision).
----
+
 ##### B. `git commit`
 
 * `git commit -m "Message"`: Commits with a concise title.

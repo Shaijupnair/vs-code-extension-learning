@@ -1,5 +1,6 @@
 """
 Code Enricher using LLM to generate summaries and keywords for code chunks.
+Supports both OpenAI and Ollama (local models like DeepSeek Coder).
 """
 
 import asyncio
@@ -9,6 +10,7 @@ from typing import List, Dict, Optional, Any
 from openai import AsyncOpenAI
 import logging
 from dotenv import load_dotenv
+import httpx
 
 # Load environment variables from .env file
 load_dotenv()
@@ -21,6 +23,7 @@ logger = logging.getLogger(__name__)
 class CodeEnricher:
     """
     Enriches code chunks with LLM-generated summaries and keywords.
+    Supports OpenAI (API) and Ollama (local).
     """
     
     def __init__(
@@ -28,30 +31,56 @@ class CodeEnricher:
         api_key: Optional[str] = None,
         model: str = "gpt-4o-mini",
         max_concurrent: int = 5,
-        mock_mode: bool = False
+        mock_mode: bool = False,
+        provider: str = "openai",  # "openai" or "ollama"
+        ollama_base_url: str = "http://localhost:11434"
     ):
         """
         Initialize the code enricher.
         
         Args:
             api_key: OpenAI API key (or None to use env variable)
-            model: Model to use for enrichment
+            model: Model to use (e.g., "gpt-4o-mini" or "deepseek-coder")
             max_concurrent: Maximum concurrent API calls
             mock_mode: If True, uses mock responses instead of API calls
+            provider: "openai" or "ollama"
+            ollama_base_url: Ollama server URL
         """
         self.model = model
         self.max_concurrent = max_concurrent
         self.mock_mode = mock_mode
+        self.provider = provider.lower()
+        self.ollama_base_url = ollama_base_url
         
-        # Initialize OpenAI client if not in mock mode
+        # Initialize client based on provider
         if not mock_mode:
-            api_key = api_key or os.getenv("OPENAI_API_KEY")
-            if not api_key:
-                logger.warning("No API key provided. Running in mock mode.")
-                self.mock_mode = True
+            if self.provider == "openai":
+                api_key = api_key or os.getenv("OPENAI_API_KEY")
+                if not api_key:
+                    logger.warning("No OpenAI API key provided. Running in mock mode.")
+                    self.mock_mode = True
+                else:
+                    self.client = AsyncOpenAI(api_key=api_key)
+                    logger.info(f"Initialized OpenAI client with model: {model}")
+            
+            elif self.provider == "ollama":
+                # Test Ollama connection
+                try:
+                    import requests
+                    response = requests.get(f"{ollama_base_url}/api/tags", timeout=2)
+                    if response.status_code == 200:
+                        logger.info(f"Connected to Ollama at {ollama_base_url}")
+                        logger.info(f"Using model: {model}")
+                    else:
+                        logger.warning(f"Ollama server not responding. Running in mock mode.")
+                        self.mock_mode = True
+                except Exception as e:
+                    logger.warning(f"Failed to connect to Ollama: {e}. Running in mock mode.")
+                    self.mock_mode = True
+            
             else:
-                self.client = AsyncOpenAI(api_key=api_key)
-                logger.info(f"Initialized OpenAI client with model: {model}")
+                logger.error(f"Unknown provider: {provider}. Supported: openai, ollama")
+                self.mock_mode = True
         
         if self.mock_mode:
             logger.info("Running in MOCK MODE - no actual API calls will be made")
@@ -113,12 +142,17 @@ class CodeEnricher:
         async with semaphore:
             if self.mock_mode:
                 return await self._mock_enrich(chunk, idx)
+            elif self.provider == "openai":
+                return await self._llm_enrich_openai(chunk, idx)
+            elif self.provider == "ollama":
+                return await self._llm_enrich_ollama(chunk, idx)
             else:
-                return await self._llm_enrich(chunk, idx)
+                logger.error(f"Unknown provider: {self.provider}")
+                return await self._mock_enrich(chunk, idx)
     
-    async def _llm_enrich(self, chunk: Dict[str, Any], idx: int) -> Dict[str, Any]:
+    async def _llm_enrich_openai(self, chunk: Dict[str, Any], idx: int) -> Dict[str, Any]:
         """
-        Enrich using actual LLM API call.
+        Enrich using OpenAI API call.
         Adds safety check for oversized chunks.
         """
         # Safety: Check chunk size before processing
@@ -173,6 +207,73 @@ class CodeEnricher:
             
         except Exception as e:
             logger.error(f"API error for chunk {idx}: {e}")
+            return self._add_fallback_enrichment(chunk)
+    
+    async def _llm_enrich_ollama(self, chunk: Dict[str, Any], idx: int) -> Dict[str, Any]:
+        """
+        Enrich using Ollama (local LLM) API call.
+        Adds safety check for oversized chunks.
+        """
+        # Safety: Check chunk size before processing
+        MAX_METHOD_BODY = 50000  # 50KB max (~1250 lines) - catches only extreme cases
+        method_body = chunk.get('method_body', '')
+        
+        if len(method_body) > MAX_METHOD_BODY:
+            logger.warning(
+                f"Chunk {idx} ({chunk.get('method_name', 'unknown')}) too large "
+                f"({len(method_body)} bytes), using fallback enrichment"
+            )
+            chunk['summary'] = f"Large method: {chunk.get('method_name', 'unknown')} (too large for LLM analysis)"
+            chunk['keywords'] = [chunk.get('method_name', 'unknown'), 'large-method', 'auto-generated']
+            return chunk
+        
+        # Construct prompt
+        prompt = self._build_prompt(chunk)
+        
+        try:
+            # Call Ollama API
+            async with httpx.AsyncClient(timeout=60.0) as client:
+                response = await client.post(
+                    f"{self.ollama_base_url}/api/generate",
+                    json={
+                        "model": self.model,
+                        "prompt": prompt,
+                        "format": "json",  # Request JSON output
+                        "stream": False,
+                        "options": {
+                            "temperature": 0.3,
+                            "num_predict": 300  # Max tokens
+                        }
+                    }
+                )
+            
+            if response.status_code == 200:
+                result = response.json()
+                content = result.get('response', '{}')
+                
+                # Parse response
+                enrichment = self._parse_llm_response(content)
+                
+                # Add enrichment to chunk
+                chunk['summary'] = enrichment.get('summary', 'Summary not available')
+                chunk['keywords'] = enrichment.get('keywords', [])
+                
+                logger.debug(f"Enriched chunk {idx} with Ollama: {chunk['method_name']}")
+                return chunk
+            else:
+                logger.error(f"Ollama API error {response.status_code}: {response.text}")
+                return self._add_fallback_enrichment(chunk)
+                
+        except httpx.TimeoutException:
+            logger.error(f"Ollama timeout for chunk {idx}")
+            return self._add_fallback_enrichment(chunk)
+            
+        except json.JSONDecodeError as e:
+            logger.error(f"JSON parsing error for chunk {idx}: {e}")
+            return self._add_fallback_enrichment(chunk)
+            
+        except Exception as e:
+            logger.error(f"Ollama API error for chunk {idx}: {e}")
             return self._add_fallback_enrichment(chunk)
     
     async def _mock_enrich(self, chunk: Dict[str, Any], idx: int) -> Dict[str, Any]:
