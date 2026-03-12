@@ -1,0 +1,7 @@
+# Python dependencies for the VS Code extension project
+# Add your Python packages here
+
+# Example packages (uncomment as needed):
+# numpy
+# pandas
+# requests
