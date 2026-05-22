@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+
+    <!-- ======================================================== -->
+    <!--  Root Element: BloodTestReport                            -->
+    <!-- ======================================================== -->
+    <xs:element name="BloodTestReport">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ReportID"       type="ReportIDType"       minOccurs="1" maxOccurs="1"/>
+                <xs:element name="GeneratedDate"  type="xs:dateTime"        minOccurs="1" maxOccurs="1"/>
+                <xs:element name="LaboratoryName" type="xs:string"          minOccurs="1" maxOccurs="1"/>
+                <xs:element name="PatientProfile" type="PatientProfileType" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="VitalSigns"     type="VitalSignsType"     minOccurs="0" maxOccurs="1"/>
+                <xs:element name="LabResults"     type="LabResultsType"     minOccurs="1" maxOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- ======================================================== -->
+    <!--  Simple Type: ReportID  (pattern: LAB-YYYY-NNNNN-XX)      -->
+    <!-- ======================================================== -->
+    <xs:simpleType name="ReportIDType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="LAB-\d{4}-\d{5}-[A-Z0-9]+"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- ======================================================== -->
+    <!--  Simple Type: LOINC Code  (pattern: digits-digit)         -->
+    <!-- ======================================================== -->
+    <xs:simpleType name="LOINCType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d+-\d"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- ======================================================== -->
+    <!--  Simple Type: Gender                                      -->
+    <!-- ======================================================== -->
+    <xs:simpleType name="GenderType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Male"/>
+            <xs:enumeration value="Female"/>
+            <xs:enumeration value="Other"/>
+            <xs:enumeration value="Unknown"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- ======================================================== -->
+    <!--  Simple Type: Blood Type                                  -->
+    <!-- ======================================================== -->
+    <xs:simpleType name="BloodTypeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="A Positive"/>
+            <xs:enumeration value="A Negative"/>
+            <xs:enumeration value="B Positive"/>
+            <xs:enumeration value="B Negative"/>
+            <xs:enumeration value="AB Positive"/>
+            <xs:enumeration value="AB Negative"/>
+            <xs:enumeration value="O Positive"/>
+            <xs:enumeration value="O Negative"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- ======================================================== -->
+    <!--  Simple Type: Interpretation                              -->
+    <!-- ======================================================== -->
+    <xs:simpleType name="InterpretationType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Normal"/>
+            <xs:enumeration value="Low"/>
+            <xs:enumeration value="High"/>
+            <xs:enumeration value="Critical"/>
+            <xs:enumeration value="Low-Critical"/>
+            <xs:enumeration value="High-Critical"/>
+            <xs:enumeration value="Optimal"/>
+            <xs:enumeration value="Deficient"/>
+            <xs:enumeration value="Insufficient"/>
+            <xs:enumeration value="Sufficient"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- ======================================================== -->
+    <!--  Simple Type: Vital Sign Type Attribute                   -->
+    <!-- ======================================================== -->
+    <xs:simpleType name="VitalTypeAttribute">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="BodyWeight"/>
+            <xs:enumeration value="BodyHeight"/>
+            <xs:enumeration value="BodyMassIndex"/>
+            <xs:enumeration value="BloodPressure_Systolic"/>
+            <xs:enumeration value="BloodPressure_Diastolic"/>
+            <xs:enumeration value="HeartRate"/>
+            <xs:enumeration value="RespiratoryRate"/>
+            <xs:enumeration value="BodyTemperature"/>
+            <xs:enumeration value="OxygenSaturation"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- ======================================================== -->
+    <!--  Complex Type: PatientProfile                             -->
+    <!-- ======================================================== -->
+    <xs:complexType name="PatientProfileType">
+        <xs:sequence>
+            <xs:element name="PatientID" type="xs:string"     minOccurs="1" maxOccurs="1"/>
+            <xs:element name="FullName"  type="xs:string"     minOccurs="1" maxOccurs="1"/>
+            <xs:element name="DOB"       type="xs:date"       minOccurs="1" maxOccurs="1"/>
+            <xs:element name="Gender"    type="GenderType"    minOccurs="1" maxOccurs="1"/>
+            <xs:element name="BloodType" type="BloodTypeType" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- ======================================================== -->
+    <!--  Complex Type: VitalSigns                                 -->
+    <!-- ======================================================== -->
+    <xs:complexType name="VitalSignsType">
+        <xs:sequence>
+            <xs:element name="Vital" type="VitalType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- ======================================================== -->
+    <!--  Complex Type: Vital (individual vital sign entry)        -->
+    <!-- ======================================================== -->
+    <xs:complexType name="VitalType">
+        <xs:sequence>
+            <xs:element name="Value" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="Unit"  type="xs:string" minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
+        <xs:attribute name="type" type="VitalTypeAttribute" use="required"/>
+    </xs:complexType>
+
+    <!-- ======================================================== -->
+    <!--  Complex Type: LabResults                                 -->
+    <!-- ======================================================== -->
+    <xs:complexType name="LabResultsType">
+        <xs:sequence>
+            <xs:element name="Panel" type="PanelType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- ======================================================== -->
+    <!--  Complex Type: Panel                                      -->
+    <!-- ======================================================== -->
+    <xs:complexType name="PanelType">
+        <xs:sequence>
+            <xs:element name="Test" type="TestType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <!-- ======================================================== -->
+    <!--  Complex Type: Test (individual lab test result)           -->
+    <!-- ======================================================== -->
+    <xs:complexType name="TestType">
+        <xs:sequence>
+            <xs:element name="TestName"        type="xs:string"          minOccurs="1" maxOccurs="1"/>
+            <xs:element name="LOINC"           type="LOINCType"          minOccurs="1" maxOccurs="1"/>
+            <xs:element name="Result"          type="xs:string"          minOccurs="1" maxOccurs="1"/>
+            <xs:element name="Unit"            type="xs:string"          minOccurs="1" maxOccurs="1"/>
+            <xs:element name="RefRange"        type="xs:string"          minOccurs="1" maxOccurs="1"/>
+            <xs:element name="Interpretation"  type="InterpretationType" minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

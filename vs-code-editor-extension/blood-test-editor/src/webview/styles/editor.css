@@ -1,0 +1,270 @@
+/* ========================================================
+   Blood Test Editor — Webview Styles
+   Uses VS Code CSS variables for native theme integration.
+   ======================================================== */
+
+/* Reset & base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--vscode-font-family, 'Segoe UI', sans-serif);
+  font-size: var(--vscode-font-size, 13px);
+  color: var(--vscode-foreground);
+  background-color: var(--vscode-editor-background);
+  padding: 0;
+  line-height: 1.5;
+}
+
+/* ---- Header ---- */
+.editor-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  background: var(--vscode-sideBar-background);
+  border-bottom: 1px solid var(--vscode-panel-border);
+  flex-wrap: wrap;
+}
+
+.editor-header .report-id {
+  font-weight: 600;
+  font-size: 1.1em;
+  color: var(--vscode-textLink-foreground);
+}
+
+.editor-header .patient-name {
+  font-weight: 500;
+}
+
+.editor-header .meta-item {
+  color: var(--vscode-descriptionForeground);
+  font-size: 0.9em;
+}
+
+/* ---- Tab Bar ---- */
+.tab-bar {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  background: var(--vscode-tab-inactiveBackground, var(--vscode-sideBar-background));
+  border-bottom: 1px solid var(--vscode-panel-border);
+  padding: 0 8px;
+}
+
+.tab-bar button {
+  all: unset;
+  cursor: pointer;
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--vscode-tab-inactiveForeground, var(--vscode-descriptionForeground));
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.tab-bar button:hover {
+  color: var(--vscode-tab-activeForeground, var(--vscode-foreground));
+  background: var(--vscode-tab-hoverBackground, rgba(255,255,255,0.04));
+}
+
+.tab-bar button.active {
+  color: var(--vscode-tab-activeForeground, var(--vscode-foreground));
+  border-bottom-color: var(--vscode-focusBorder, #007acc);
+}
+
+/* ---- Panel Content ---- */
+.panel-content {
+  padding: 16px 20px;
+}
+
+.panel-description {
+  color: var(--vscode-descriptionForeground);
+  margin-bottom: 16px;
+  font-size: 0.9em;
+}
+
+/* ---- Field Grid ---- */
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 12px;
+}
+
+/* ---- Test Field Card ---- */
+.test-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid var(--vscode-input-border, #3c3c3c);
+  background: var(--vscode-input-background, #1e1e1e);
+  transition: border-color 0.15s;
+}
+
+.test-field:focus-within {
+  border-color: var(--vscode-focusBorder, #007acc);
+}
+
+.test-field.has-error {
+  border-color: var(--vscode-inputValidation-errorBorder, #be1100);
+  background: var(--vscode-inputValidation-errorBackground, rgba(190, 17, 0, 0.1));
+}
+
+.test-field .field-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.test-field .field-label {
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--vscode-foreground);
+}
+
+.test-field .field-unit {
+  font-size: 11px;
+  color: var(--vscode-descriptionForeground);
+  background: var(--vscode-badge-background, #4d4d4d);
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+
+.test-field .field-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.test-field input {
+  flex: 1;
+  padding: 4px 8px;
+  font-size: 13px;
+  color: var(--vscode-input-foreground, var(--vscode-foreground));
+  background: var(--vscode-input-background, #3c3c3c);
+  border: 1px solid var(--vscode-input-border, #3c3c3c);
+  border-radius: 3px;
+  outline: none;
+  font-family: var(--vscode-editor-font-family, monospace);
+}
+
+.test-field input:focus {
+  border-color: var(--vscode-focusBorder, #007acc);
+}
+
+.test-field input.error {
+  border-color: var(--vscode-inputValidation-errorBorder, #be1100);
+}
+
+/* ---- Interpretation Badge ---- */
+.interpretation-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.interpretation-badge.status-normal {
+  background: rgba(35, 134, 54, 0.25);
+  color: #4ec869;
+}
+
+.interpretation-badge.status-low {
+  background: rgba(200, 150, 30, 0.25);
+  color: #e8c84a;
+}
+
+.interpretation-badge.status-high {
+  background: rgba(220, 120, 30, 0.25);
+  color: #e89a4a;
+}
+
+.interpretation-badge.status-critical {
+  background: rgba(190, 17, 0, 0.25);
+  color: #f14c4c;
+}
+
+.interpretation-badge.status-optimal {
+  background: rgba(35, 134, 184, 0.25);
+  color: #4ec8db;
+}
+
+.interpretation-badge.status-unknown {
+  background: rgba(128, 128, 128, 0.2);
+  color: var(--vscode-descriptionForeground);
+}
+
+/* ---- Tooltip ---- */
+.tooltip-icon {
+  cursor: help;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--vscode-descriptionForeground);
+  border: 1px solid var(--vscode-descriptionForeground);
+  opacity: 0.6;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.tooltip-icon:hover {
+  opacity: 1;
+}
+
+.tooltip-icon .tooltip-text {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 6px;
+  padding: 6px 10px;
+  background: var(--vscode-editorHoverWidget-background, #252526);
+  border: 1px solid var(--vscode-editorHoverWidget-border, #454545);
+  border-radius: 4px;
+  color: var(--vscode-editorHoverWidget-foreground, var(--vscode-foreground));
+  font-size: 11px;
+  font-weight: 400;
+  white-space: nowrap;
+  max-width: 300px;
+  white-space: normal;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.tooltip-icon:hover .tooltip-text {
+  display: block;
+}
+
+/* ---- Error message ---- */
+.field-error-msg {
+  font-size: 11px;
+  color: var(--vscode-inputValidation-errorForeground, #f14c4c);
+  margin-top: 2px;
+}
+
+/* ---- Loading ---- */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: var(--vscode-descriptionForeground);
+  font-size: 14px;
+}

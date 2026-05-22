@@ -1,0 +1,239 @@
+{
+  "blood_test_master_catalog": [
+    {
+      "panel_id": "HEM-001",
+      "panel_name": "Hematology (CBC)",
+      "tests": [
+        {
+          "test_name": "White Blood Cell Count (WBC)",
+          "loinc": "6690-2",
+          "unit": "x10^3/uL",
+          "interpretation_rules": [
+            { "status": "Low-Critical", "min": 0, "max": 1.9 },
+            { "status": "Low", "min": 2.0, "max": 4.4 },
+            { "status": "Normal", "min": 4.5, "max": 11.0 },
+            { "status": "High", "min": 11.1, "max": 29.9 },
+            { "status": "High-Critical", "min": 30.0, "max": 100 }
+          ]
+        },
+        {
+          "test_name": "Hemoglobin",
+          "loinc": "718-7",
+          "unit": "g/dL",
+          "interpretation_rules": [
+            { "status": "Low-Critical", "min": 0, "max": 6.9 },
+            { "status": "Low", "min": 7.0, "max": 13.4 },
+            { "status": "Normal", "min": 13.5, "max": 17.5 },
+            { "status": "High", "min": 17.6, "max": 19.9 },
+            { "status": "High-Critical", "min": 20.0, "max": 30 }
+          ]
+        },
+        {
+          "test_name": "Platelet Count",
+          "loinc": "777-3",
+          "unit": "x10^3/uL",
+          "interpretation_rules": [
+            { "status": "Low-Critical", "min": 0, "max": 20 },
+            { "status": "Low", "min": 21, "max": 149 },
+            { "status": "Normal", "min": 150, "max": 450 },
+            { "status": "High", "min": 451, "max": 999 },
+            { "status": "High-Critical", "min": 1000, "max": 2500 }
+          ]
+        }
+      ]
+    },
+    {
+      "panel_id": "MET-002",
+      "panel_name": "Comprehensive Metabolic Panel (CMP)",
+      "tests": [
+        {
+          "test_name": "Glucose (Fasting)",
+          "loinc": "2339-0",
+          "unit": "mg/dL",
+          "interpretation_rules": [
+            { "status": "Low-Critical", "min": 0, "max": 39 },
+            { "status": "Low", "min": 40, "max": 69 },
+            { "status": "Normal", "min": 70, "max": 99 },
+            { "status": "High (Prediabetes/Diabetes)", "min": 100, "max": 399 },
+            { "status": "High-Critical", "min": 400, "max": 1000 }
+          ]
+        },
+        {
+          "test_name": "Creatinine",
+          "loinc": "2160-0",
+          "unit": "mg/dL",
+          "interpretation_rules": [
+            { "status": "Low", "min": 0, "max": 0.59 },
+            { "status": "Normal", "min": 0.6, "max": 1.3 },
+            { "status": "High", "min": 1.31, "max": 5.9 },
+            { "status": "High-Critical", "min": 6.0, "max": 15 }
+          ]
+        },
+        {
+          "test_name": "ALT (SGPT)",
+          "loinc": "1742-6",
+          "unit": "U/L",
+          "interpretation_rules": [
+            { "status": "Normal", "min": 0, "max": 44 },
+            { "status": "High", "min": 45, "max": 999 },
+            { "status": "High-Critical", "min": 1000, "max": 5000 }
+          ]
+        }
+      ]
+    },
+    {
+      "panel_id": "LIP-003",
+      "panel_name": "Lipid Profile",
+      "tests": [
+        {
+          "test_name": "Total Cholesterol",
+          "loinc": "2093-3",
+          "unit": "mg/dL",
+          "interpretation_rules": [
+            { "status": "Normal/Desirable", "min": 0, "max": 199 },
+            { "status": "High (Borderline)", "min": 200, "max": 239 },
+            { "status": "High-Risk", "min": 240, "max": 600 }
+          ]
+        },
+        {
+          "test_name": "LDL Cholesterol",
+          "loinc": "13457-7",
+          "unit": "mg/dL",
+          "interpretation_rules": [
+            { "status": "Optimal", "min": 0, "max": 99 },
+            { "status": "Normal", "min": 100, "max": 129 },
+            { "status": "High", "min": 130, "max": 189 },
+            { "status": "Very High", "min": 190, "max": 500 }
+          ]
+        },
+        {
+          "test_name": "HDL Cholesterol",
+          "loinc": "2085-9",
+          "unit": "mg/dL",
+          "interpretation_rules": [
+            { "status": "Low-Risk Factor", "min": 0, "max": 39 },
+            { "status": "Intermediate", "min": 40, "max": 59 },
+            { "status": "Optimal", "min": 60, "max": 120 }
+          ]
+        }
+      ]
+    },
+    {
+      "panel_id": "END-004",
+      "panel_name": "Thyroid & Endocrine",
+      "tests": [
+        {
+          "test_name": "TSH",
+          "loinc": "11579-0",
+          "unit": "uIU/mL",
+          "interpretation_rules": [
+            { "status": "Low-Critical", "min": 0, "max": 0.09 },
+            { "status": "Low (Hyperthyroid)", "min": 0.1, "max": 0.44 },
+            { "status": "Normal", "min": 0.45, "max": 4.5 },
+            { "status": "High (Hypothyroid)", "min": 4.51, "max": 19.9 },
+            { "status": "High-Critical", "min": 20.0, "max": 150 }
+          ]
+        },
+        {
+          "test_name": "Free T4",
+          "loinc": "2278-4",
+          "unit": "ng/dL",
+          "interpretation_rules": [
+            { "status": "Low-Critical", "min": 0, "max": 0.39 },
+            { "status": "Low", "min": 0.4, "max": 0.79 },
+            { "status": "Normal", "min": 0.8, "max": 1.8 },
+            { "status": "High", "min": 1.81, "max": 4.99 },
+            { "status": "High-Critical", "min": 5.0, "max": 15.0 }
+          ]
+        }
+      ]
+    },
+    {
+      "panel_id": "IMM-005",
+      "panel_name": "Immunology",
+      "tests": [
+        {
+          "test_name": "C-Reactive Protein (CRP)",
+          "loinc": "1988-5",
+          "unit": "mg/L",
+          "interpretation_rules": [
+            { "status": "Normal (Low inflammation)", "min": 0, "max": 3.0 },
+            { "status": "High (Moderate inflammation)", "min": 3.1, "max": 10.0 },
+            { "status": "High-Critical (Acute infection)", "min": 10.1, "max": 500 }
+          ]
+        }
+      ]
+    },
+    {
+      "panel_id": "ONC-006",
+      "panel_name": "Tumor Markers",
+      "tests": [
+        {
+          "test_name": "PSA",
+          "loinc": "2857-1",
+          "unit": "ng/mL",
+          "interpretation_rules": [
+            { "status": "Normal", "min": 0, "max": 4.0 },
+            { "status": "High (Requires Follow-up)", "min": 4.1, "max": 10.0 },
+            { "status": "High-Critical", "min": 10.1, "max": 1000 }
+          ]
+        }
+      ]
+    },
+    {
+      "panel_id": "NUT-007",
+      "panel_name": "Nutrition & Vitamins",
+      "tests": [
+        {
+          "test_name": "Vitamin D, 25-Hydroxy",
+          "loinc": "62292-8",
+          "unit": "ng/mL",
+          "interpretation_rules": [
+            { "status": "Severe Deficiency", "min": 0, "max": 10 },
+            { "status": "Deficient", "min": 11, "max": 29 },
+            { "status": "Sufficient", "min": 30, "max": 100 },
+            { "status": "Potential Toxicity", "min": 101, "max": 250 }
+          ]
+        },
+        {
+          "test_name": "Vitamin B12",
+          "loinc": "2132-9",
+          "unit": "pg/mL",
+          "interpretation_rules": [
+            { "status": "Low-Critical", "min": 0, "max": 150 },
+            { "status": "Low", "min": 151, "max": 199 },
+            { "status": "Normal", "min": 200, "max": 900 },
+            { "status": "High", "min": 901, "max": 2000 }
+          ]
+        }
+      ]
+    },
+    {
+      "panel_id": "COA-008",
+      "panel_name": "Coagulation Panel",
+      "tests": [
+        {
+          "test_name": "Prothrombin Time (PT)",
+          "loinc": "5902-2",
+          "unit": "sec",
+          "interpretation_rules": [
+            { "status": "Normal", "min": 11.0, "max": 13.5 },
+            { "status": "High", "min": 13.6, "max": 29.9 },
+            { "status": "High-Critical", "min": 30.0, "max": 120.0 }
+          ]
+        },
+        {
+          "test_name": "INR",
+          "loinc": "4544-3",
+          "unit": "ratio",
+          "interpretation_rules": [
+            { "status": "Normal", "min": 0.8, "max": 1.1 },
+            { "status": "Therapeutic Range", "min": 2.0, "max": 3.0 },
+            { "status": "High", "min": 3.1, "max": 4.9 },
+            { "status": "High-Critical (Bleeding Risk)", "min": 5.0, "max": 15.0 }
+          ]
+        }
+      ]
+    }
+  ]
+}
